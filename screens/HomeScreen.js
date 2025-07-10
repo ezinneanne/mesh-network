@@ -1,17 +1,83 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Offline Pay</Text>
-      <Button title="Login" onPress={() => navigation.navigate('Login')} />
-      <Button title="Sign Up" onPress={() => navigation.navigate('SignUp')} />
+      <Image
+        source={require('../assets/offlinepaylogo_transparent.png')}
+        style={styles.logo}
+        accessibilityLabel="Offline Pay Logo"
+      />
+
+      <Text style={styles.paragraph}>
+        Your secure, peer-to-peer payments, even without internet.
+      </Text>
+
+      <Image
+        source={require('../assets/twopeopleholdingbitcoin.png')}
+        style={styles.illustration}
+        accessibilityLabel="Secure Payments Illustration"
+      />
+
+      <View style={{ height: 30 }} />
+
+      <TouchableOpacity
+        style={styles.customButton}
+        onPress={() => navigation.navigate('Login')} 
+      >
+        <Text style={styles.customButtonText}>Get Started</Text>
+      </TouchableOpacity>
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 }
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20, // Add some padding around the content
+    backgroundColor: '#f5f5f5', // Optional: light background
+  },
+  logo: {
+    width: 150,
+    height: 150,
+    marginBottom: 20, // Space below the logo
+    borderRadius: 75, // Make it circular if desired
+  },
+  paragraph: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 30, // Space below the paragraph
+    color: '#333',
+    lineHeight: 24,
+  },
+  illustration: {
+    width: '80%', // Responsive width
+    height: 180, // Fixed height for the illustration
+    resizeMode: 'contain', // Ensures the image fits within the bounds
+    marginBottom: 20, // Space below the illustration
+  },
+  customButton: {
+    backgroundColor: '#6a78f0', // The requested color
+    width: '70%', // Some width
+    minHeight: 50, // Minimal height
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10, // Rounded corners for the button
+    paddingVertical: 12, // Vertical padding for touch target
+    marginTop: 20, // Space above the button
+    shadowColor: '#000', // Optional: Add shadow for depth
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 8, // Android shadow
+  },
+  customButtonText: {
+    color: '#ffffff', // White text color
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
