@@ -24,7 +24,7 @@ export default function HomeScreen({ navigation }) {
 
       <TouchableOpacity
         style={styles.customButton}
-        onPress={() => navigation.navigate('Login')} 
+        onPress={() => navigation.navigate('SignUp')} 
       >
         <Text style={styles.customButtonText}>Get Started</Text>
       </TouchableOpacity>
@@ -55,28 +55,28 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   illustration: {
-    width: '80%', // Responsive width
-    height: 180, // Fixed height for the illustration
+    width: '100%', // Responsive width
+    height: 200, // Fixed height for the illustration
     resizeMode: 'contain', // Ensures the image fits within the bounds
     marginBottom: 20, // Space below the illustration
   },
   customButton: {
-    backgroundColor: '#6a78f0', // The requested color
-    width: '70%', // Some width
-    minHeight: 50, // Minimal height
+    backgroundColor: '#6a78f0',
+    width: '100%',
+    minHeight: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10, // Rounded corners for the button
-    paddingVertical: 12, // Vertical padding for touch target
-    marginTop: 20, // Space above the button
-    shadowColor: '#000', // Optional: Add shadow for depth
+    borderRadius: 20,
+    paddingVertical: 12,
+    marginTop: 20,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 5,
-    elevation: 8, // Android shadow
+    elevation: 8,
   },
   customButtonText: {
-    color: '#ffffff', // White text color
+    color: '#ffffff',
     fontSize: 18,
     fontWeight: 'bold',
   },
