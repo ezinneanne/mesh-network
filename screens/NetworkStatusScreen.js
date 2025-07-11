@@ -49,13 +49,12 @@ export default function NetworkStatusScreen() {
       </View>
 
       <View style={styles.networkControlBox}>
-        <Text style={styles.sectionTitle}>Mesh Network</Text>
-        <View style={styles.divider} />
 
         <View style={styles.toggleRow}>
-          <Text style={styles.toggleLabel}>Enable Network</Text>
+          <Text style={styles.toggleLabel}>Mesh Network</Text>
           <MaterialIcons name="toggle-on" size={36} color="#6a78f0" />
         </View>
+        <View style={styles.divider} />
 
         <View style={styles.buttonRow}>
           <TouchableOpacity style={styles.actionButton}>
@@ -197,20 +196,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#6a78f0',
     fontWeight: '500',
-  },
-  bottomNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 15,
-    borderTopWidth: 1,
-    borderTopColor: '#ddd',
-  },
-  navItem: {
-    alignItems: 'center',
-  },
-  navText: {
-    fontSize: 12,
-    color: '#6a78f0',
-    marginTop: 4,
   },
 });
