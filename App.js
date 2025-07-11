@@ -8,7 +8,6 @@ import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import SendMoneyScreen from './screens/SendMoneyScreen';
-import CreateTransactionScreen from './screens/CreateTransactionScreen';
 import NotificationsScreen from './screens/NotificationsScreen';
 import NetworkStatusScreen from './screens/NetworkStatusScreen';
 
@@ -52,7 +51,6 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="SendMoney" component={SendMoneyScreen} />
-        <Stack.Screen name="CreateTransaction" component={CreateTransactionScreen} />
         <Stack.Screen name="Main" component={MainTabs} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
