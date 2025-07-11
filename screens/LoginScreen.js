@@ -7,69 +7,87 @@ import {
   TouchableOpacity,
   StyleSheet,
   Pressable,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function LoginScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('../assets/offlinepaylogo_transparent.png')}
-        style={styles.logo}
-        accessibilityLabel="Offline Pay Logo"
-      />
-
-      <Text style={styles.title}>Login</Text>
-
-      <Text style={styles.label}>Email</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="e.g., user@example.com"
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-
-      <Text style={styles.label}>Password</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your password"
-        secureTextEntry
-      />
-
-      <TouchableOpacity
-        style={styles.customButton}
-        onPress={() => navigation.navigate('Main')}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={60}
+    >
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        keyboardShouldPersistTaps="handled"
       >
-        <Text style={styles.customButtonText}>Log In</Text>
-      </TouchableOpacity>
+        <Image
+          source={require('../assets/offlinepaylogo_transparent.png')}
+          style={styles.logo}
+          accessibilityLabel="Offline Pay Logo"
+        />
 
-      <TouchableOpacity
-        style={styles.biometricButton}
-        onPress={() => alert('Biometric login coming soon')}
-      >
-        <Ionicons name="finger-print" size={28} color="#6a78f0" />
-        <Text style={styles.biometricText}>Use Biometrics</Text>
-      </TouchableOpacity>
+        <Text style={styles.title}>Login</Text>
 
-      <Pressable onPress={() => navigation.navigate('SignUp')}>
-        {({ pressed }) => (
-          <Text style={styles.inlineText}>
-            <Text style={styles.already}>Don't Have an account?</Text>
+        <Text style={styles.label}>Email</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="e.g., user@example.com"
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+
+        <Text style={styles.label}>Password</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your password"
+          secureTextEntry
+        />
+
+        <TouchableOpacity
+          style={styles.customButton}
+          onPress={() => navigation.navigate('Main')}
+        >
+          <Text style={styles.customButtonText}>Log In</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.biometricButton}
+          onPress={() => alert('Biometric login coming soon')}
+        >
+          <Ionicons name="finger-print" size={28} color="#6a78f0" />
+          <Text style={styles.biometricText}>Use Biometrics</Text>
+        </TouchableOpacity>
+
+        <Pressable onPress={() => navigation.navigate('SignUp')}>
+          {({ pressed }) => (
+            <Text style={styles.inlineText}>
+              <Text style={styles.already}>Don't Have an account?</Text>
               <Text
-                style={[styles.loginInstead, pressed && styles.loginInsteadPressed,]}>
-                  {' '}Sign Up Instead
-                    </Text>
-              </Text>)}
-      </Pressable>
-    </View>
+                style={[
+                  styles.loginInstead,
+                  pressed && styles.loginInsteadPressed,
+                ]}
+              >
+                {' '}
+                Sign Up Instead
+              </Text>
+            </Text>
+          )}
+        </Pressable>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
+  scrollContainer: {
+    flexGrow: 1,
     justifyContent: 'center',
+    padding: 24,
     backgroundColor: '#fff',
   },
   logo: {
@@ -125,20 +143,20 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   inlineText: {
-  textAlign: 'center',
-  marginTop: 15,
+    textAlign: 'center',
+    marginTop: 15,
   },
   already: {
-   color: '#333',
-   fontWeight: '600',
-   fontSize: 14,
+    color: '#333',
+    fontWeight: '600',
+    fontSize: 14,
   },
   loginInstead: {
-   color: '#f56c94',
-   fontWeight: '600',
-   fontSize: 14,
+    color: '#f56c94',
+    fontWeight: '600',
+    fontSize: 14,
   },
   loginInsteadPressed: {
-   textDecorationLine: 'underline',
+    textDecorationLine: 'underline',
   },
 });
