@@ -1,5 +1,13 @@
 import React from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons'; // For biometric icon
 
 export default function LoginScreen({ navigation }) {
   return (
@@ -9,49 +17,112 @@ export default function LoginScreen({ navigation }) {
         style={styles.logo}
         accessibilityLabel="Offline Pay Logo"
       />
+
       <Text style={styles.title}>Login</Text>
-      <TextInput style={styles.input} placeholder="Email" />
-      <TextInput style={styles.input} placeholder="Password" secureTextEntry />
+
+      <Text style={styles.label}>Email</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="e.g., user@example.com"
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+
+      <Text style={styles.label}>Password</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter your password"
+        secureTextEntry
+      />
+
       <TouchableOpacity
-              style={styles.customButton}
-              onPress={() => navigation.navigate('Main')} 
-            >
-              <Text style={styles.customButtonText}>Log In</Text>
+        style={styles.customButton}
+        onPress={() => navigation.navigate('Main')}
+      >
+        <Text style={styles.customButtonText}>Log In</Text>
       </TouchableOpacity>
-      
-      <Text style={styles.paragraph}>Don't have an account? Sign Up Instead </Text> 
+
+      <TouchableOpacity
+        style={styles.biometricButton}
+        onPress={() => alert('Biometric login coming soon')}
+      >
+        <Ionicons name="finger-print" size={28} color="#6a78f0" />
+        <Text style={styles.biometricText}>Use Biometrics</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+        <Text style={styles.signUpText}>
+          Don't have an account?{' '}
+          <Text style={{ color: '#f56c94', fontWeight: 'bold' }}>Sign Up Instead</Text>
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, justifyContent: 'center' },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 },
-  input: { borderWidth: 1, marginBottom: 15, padding: 10, borderRadius: 5 },
+  container: {
+    flex: 1,
+    padding: 24,
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+  },
   logo: {
-    width: 150,
-    height: 150,
+    width: 120,
+    height: 120,
+    alignSelf: 'center',
     marginBottom: 20,
-    borderRadius: 75,
+    resizeMode: 'contain',
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: '500',
+    marginBottom: 6,
+    marginTop: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 10,
+    fontSize: 16,
   },
   customButton: {
     backgroundColor: '#6a78f0',
-    width: '100%',
-    minHeight: 30,
-    justifyContent: 'center',
+    paddingVertical: 14,
+    borderRadius: 10,
     alignItems: 'center',
-    borderRadius: 20,
-    paddingVertical: 12,
     marginTop: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 8,
+    elevation: 5,
   },
   customButtonText: {
-    color: '#ffffff',
+    color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  biometricButton: {
+    marginTop: 30,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  biometricText: {
+    fontSize: 16,
+    color: '#6a78f0',
+    marginLeft: 8,
+    fontWeight: '500',
+  },
+  signUpText: {
+    marginTop: 25,
+    textAlign: 'center',
+    color: '#333',
+    fontSize: 14,
   },
 });

@@ -8,6 +8,8 @@ import {
   Switch,
   StyleSheet,
   ScrollView,
+  Pressable,
+
 } from 'react-native';
 
 export default function SignUpScreen({ navigation }) {
@@ -57,9 +59,16 @@ export default function SignUpScreen({ navigation }) {
           <Text style={styles.customButtonText}>Sign Up</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.already}> Already have an account?</Text><Text style={styles.loginInstead}> Log In Instead</Text>
-        </TouchableOpacity>
+        <Pressable onPress={() => navigation.navigate('Login')}>
+          {({ pressed }) => (
+            <Text style={styles.inlineText}>
+              <Text style={styles.already}>Already have an account?</Text>
+                <Text
+                  style={[styles.loginInstead, pressed && styles.loginInsteadPressed,]}>
+                    {' '}Log In Instead
+                </Text>
+            </Text>)}
+        </Pressable>
 
         <View style={styles.termsContainer}>
           <Text style={styles.termsText}>
@@ -138,19 +147,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  inlineText: {
+  textAlign: 'center',
+  marginTop: 15,
+  },
   already: {
-    marginTop: 15,
-    textAlign: 'center',
-    color: '#333',
-    fontWeight: '600',
-    fontSize: 14,
+   color: '#333',
+   fontWeight: '600',
+   fontSize: 14,
   },
   loginInstead: {
-    marginTop: 15,
-    textAlign: 'center',
-    color: '#f56c94',
-    fontWeight: '600',
-    fontSize: 14,
+   color: '#f56c94',
+   fontWeight: '600',
+   fontSize: 14,
+  },
+  loginInsteadPressed: {
+   textDecorationLine: 'underline',
   },
   termsContainer: {
     marginTop: 30,
