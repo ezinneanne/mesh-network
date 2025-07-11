@@ -9,76 +9,110 @@ import {
   StyleSheet,
   ScrollView,
   Pressable,
-
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 
 export default function SignUpScreen({ navigation }) {
   const [isBiometricEnabled, setBiometricEnabled] = useState(false);
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.innerContainer}>
-        <Image
-          source={require('../assets/offlinepaylogo_transparent.png')}
-          style={styles.logo}
-          accessibilityLabel="Offline Pay Logo"
-        />
-
-        <Text style={styles.title}>Sign Up</Text>
-
-        <Text style={styles.label}>Full Name</Text>
-        <TextInput style={styles.input} placeholder="e.g., Jane Doe" />
-
-        <Text style={styles.label}>Email</Text>
-        <TextInput style={styles.input} placeholder="e.g., jane@example.com" keyboardType="email-address" />
-
-        <Text style={styles.label}>Phone Number</Text>
-        <TextInput style={styles.input} placeholder="e.g., +2348123456789" keyboardType="phone-pad" />
-
-        <Text style={styles.label}>Password</Text>
-        <TextInput style={styles.input} placeholder="Enter your password" secureTextEntry />
-
-        <Text style={styles.label}>Bank Account (Optional)</Text>
-        <TextInput style={styles.input} placeholder="e.g., 1234567890" keyboardType="number-pad" />
-        <Text style={styles.helperText}>Adding bank accounts makes transactions faster.</Text>
-
-        <View style={styles.biometricContainer}>
-          <Text style={styles.label}>Enable Biometric Login</Text>
-          <Switch
-            value={isBiometricEnabled}
-            onValueChange={setBiometricEnabled}
-            thumbColor={isBiometricEnabled ? '#6a78f0' : '#ccc'}
-            trackColor={{ false: '#ccc', true: '#a3acf6' }}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={60}
+    >
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View style={styles.innerContainer}>
+          <Image
+            source={require('../assets/offlinepaylogo_transparent.png')}
+            style={styles.logo}
+            accessibilityLabel="Offline Pay Logo"
           />
-        </View>
 
-        <TouchableOpacity
-          style={styles.customButton}
-          onPress={() => navigation.navigate('Main')}
-        >
-          <Text style={styles.customButtonText}>Sign Up</Text>
-        </TouchableOpacity>
+          <Text style={styles.title}>Sign Up</Text>
 
-        <Pressable onPress={() => navigation.navigate('Login')}>
-          {({ pressed }) => (
-            <Text style={styles.inlineText}>
-              <Text style={styles.already}>Already have an account?</Text>
-                <Text
-                  style={[styles.loginInstead, pressed && styles.loginInsteadPressed,]}>
-                    {' '}Log In Instead
-                </Text>
-            </Text>)}
-        </Pressable>
+          <Text style={styles.label}>Full Name</Text>
+          <TextInput style={styles.input} placeholder="e.g., Jane Doe" />
 
-        <View style={styles.termsContainer}>
-          <Text style={styles.termsText}>
-            By processing, you agree to our{' '}
-            <Text style={styles.linkText}>Terms of Service</Text> and{' '}
-            <Text style={styles.linkText}>Privacy Policy</Text>.
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="e.g., jane@example.com"
+            keyboardType="email-address"
+          />
+
+          <Text style={styles.label}>Phone Number</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="e.g., +2348123456789"
+            keyboardType="phone-pad"
+          />
+
+          <Text style={styles.label}>Password</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your password"
+            secureTextEntry
+          />
+
+          <Text style={styles.label}>Bank Account (Optional)</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="e.g., 1234567890"
+            keyboardType="number-pad"
+          />
+          <Text style={styles.helperText}>
+            Adding bank accounts makes transactions faster.
           </Text>
+
+          <View style={styles.biometricContainer}>
+            <Text style={styles.label}>Enable Biometric Login</Text>
+            <Switch
+              value={isBiometricEnabled}
+              onValueChange={setBiometricEnabled}
+              thumbColor={isBiometricEnabled ? '#6a78f0' : '#ccc'}
+              trackColor={{ false: '#ccc', true: '#a3acf6' }}
+            />
+          </View>
+
+          <TouchableOpacity
+            style={styles.customButton}
+            onPress={() => navigation.navigate('Main')}
+          >
+            <Text style={styles.customButtonText}>Sign Up</Text>
+          </TouchableOpacity>
+
+          <Pressable onPress={() => navigation.navigate('Login')}>
+            {({ pressed }) => (
+              <Text style={styles.inlineText}>
+                <Text style={styles.already}>Already have an account?</Text>
+                <Text
+                  style={[
+                    styles.loginInstead,
+                    pressed && styles.loginInsteadPressed,
+                  ]}
+                >
+                  {' '}
+                  Log In Instead
+                </Text>
+              </Text>
+            )}
+          </Pressable>
+
+          <View style={styles.termsContainer}>
+            <Text style={styles.termsText}>
+              By processing, you agree to our{' '}
+              <Text style={styles.linkText}>Terms of Service</Text> and{' '}
+              <Text style={styles.linkText}>Privacy Policy</Text>.
+            </Text>
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -93,7 +127,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignItems: 'center',
   },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
   label: {
     fontSize: 14,
     fontWeight: '500',
@@ -148,21 +187,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   inlineText: {
-  textAlign: 'center',
-  marginTop: 15,
+    textAlign: 'center',
+    marginTop: 15,
   },
   already: {
-   color: '#333',
-   fontWeight: '600',
-   fontSize: 14,
+    color: '#333',
+    fontWeight: '600',
+    fontSize: 14,
   },
   loginInstead: {
-   color: '#f56c94',
-   fontWeight: '600',
-   fontSize: 14,
+    color: '#f56c94',
+    fontWeight: '600',
+    fontSize: 14,
   },
   loginInsteadPressed: {
-   textDecorationLine: 'underline',
+    textDecorationLine: 'underline',
   },
   termsContainer: {
     marginTop: 30,

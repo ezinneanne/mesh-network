@@ -44,16 +44,14 @@ export default function SendMoneyScreen({ navigation }) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="#333" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Send Money</Text>
-        <View style={{ width: 24 }} /> {/* Spacer */}
+        <View style={{ width: 24 }} />
       </View>
 
-      {/* Select Recipient Box */}
       <View style={styles.sectionBox}>
       <Text style={styles.sectionTitle}>Select Recipient</Text>
       <TouchableOpacity
@@ -73,7 +71,6 @@ export default function SendMoneyScreen({ navigation }) {
         />
       </TouchableOpacity>
 
-      {/* Dropdown list */}
       {isDropdownVisible && (
         <View style={styles.dropdown}>
           {recipients.map((item, index) => (
@@ -96,7 +93,6 @@ export default function SendMoneyScreen({ navigation }) {
       )}
     </View>
 
-      {/* Amount & Note Box */}
       <View style={styles.sectionBox}>
         <Text style={styles.sectionTitle}>Amount</Text>
         <View style={styles.amountBox}>
@@ -119,7 +115,6 @@ export default function SendMoneyScreen({ navigation }) {
         />
       </View>
 
-      {/* Transaction Details */}
       <View style={styles.summaryBox}>
         <Text style={styles.sectionTitle}>Transaction Details</Text>
 
@@ -151,7 +146,6 @@ export default function SendMoneyScreen({ navigation }) {
         </View>
       </View>
 
-      {/* Buttons */}
       <View style={styles.buttonRow}>
         <TouchableOpacity style={styles.confirmButton}>
           <Text style={styles.buttonText}>Confirm Transaction</Text>
@@ -161,7 +155,6 @@ export default function SendMoneyScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      {/* Connection Info */}
       <Text style={styles.networkStatus}>Mesh Network Connected</Text>
     </ScrollView>
   );
