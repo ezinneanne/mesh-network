@@ -1,4 +1,5 @@
 import React from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -16,7 +17,26 @@ const Tab = createBottomTabNavigator();
 
 function MainTabs() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarIcon: ({ color, size }) => {
+          let iconName;
+
+          if (route.name === 'Network') {
+            iconName = 'wifi';
+          } else if (route.name === 'Send') {
+            iconName = 'send';
+          } else if (route.name === 'Notifications') {
+            iconName = 'notifications';
+          }
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: '#6a78f0',
+        tabBarInactiveTintColor: 'gray',
+      })}
+    >
       <Tab.Screen name="Network" component={NetworkStatusScreen} />
       <Tab.Screen name="Send" component={SendMoneyScreen} />
       <Tab.Screen name="Notifications" component={NotificationsScreen} />

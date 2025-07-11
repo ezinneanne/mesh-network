@@ -6,8 +6,9 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
+  Pressable,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // For biometric icon
+import { Ionicons } from '@expo/vector-icons';
 
 export default function LoginScreen({ navigation }) {
   return (
@@ -50,12 +51,16 @@ export default function LoginScreen({ navigation }) {
         <Text style={styles.biometricText}>Use Biometrics</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-        <Text style={styles.signUpText}>
-          Don't have an account?{' '}
-          <Text style={{ color: '#f56c94', fontWeight: 'bold' }}>Sign Up Instead</Text>
-        </Text>
-      </TouchableOpacity>
+      <Pressable onPress={() => navigation.navigate('SignUp')}>
+        {({ pressed }) => (
+          <Text style={styles.inlineText}>
+            <Text style={styles.already}>Don't Have an account?</Text>
+              <Text
+                style={[styles.loginInstead, pressed && styles.loginInsteadPressed,]}>
+                  {' '}Sign Up Instead
+                    </Text>
+              </Text>)}
+      </Pressable>
     </View>
   );
 }
@@ -119,10 +124,21 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     fontWeight: '500',
   },
-  signUpText: {
-    marginTop: 25,
-    textAlign: 'center',
-    color: '#333',
-    fontSize: 14,
+  inlineText: {
+  textAlign: 'center',
+  marginTop: 15,
+  },
+  already: {
+   color: '#333',
+   fontWeight: '600',
+   fontSize: 14,
+  },
+  loginInstead: {
+   color: '#f56c94',
+   fontWeight: '600',
+   fontSize: 14,
+  },
+  loginInsteadPressed: {
+   textDecorationLine: 'underline',
   },
 });
